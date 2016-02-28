@@ -1,0 +1,36 @@
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'me.tatarka.retrolambda'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.squareup.okhttp3:okhttp:3.2.0'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.7.0'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.0'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.7.0'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-guava:2.7.0'
+    compile 'org.projectlombok:lombok:1.16.6'
+    compile 'org.slf4j:slf4j-api:1.7.+'
+    compile 'com.google.guava:guava:19.0'
+    compile 'joda-time:joda-time:2.9.2'
+
+    testCompile('junit:junit:4.12')
+
+    testCompile 'org.jmock:jmock-junit4:2.5.1'
+    testCompile 'org.jmock:jmock-legacy:2.5.1'
+    testCompile 'org.jmock:jmock:2.5.1'
+}
