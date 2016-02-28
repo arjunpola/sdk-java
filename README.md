@@ -1,11 +1,9 @@
-
 # Ticketmaster Java SDK for Android
-
-
-## Android compatibility
 
 This is a gradle Fork of the Ticketmaster Java SDK for use with Android. The project has been setup with
 gradle using the same dependencies as the master branch. The maven files are kept for reference.
+
+## Android compatibility
 
 It builds successfully with [retrolambda](https://medium.com/android-news/retrolambda-on-android-191cc8151f85#.pbtrhv7g4 "retrolambda")
 as a java library project for an android application.
