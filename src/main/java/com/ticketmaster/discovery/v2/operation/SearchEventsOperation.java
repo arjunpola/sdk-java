@@ -10,8 +10,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static java.util.Optional.ofNullable;
-
 @ToString
 @EqualsAndHashCode
 public class SearchEventsOperation extends Operation {
@@ -19,23 +17,47 @@ public class SearchEventsOperation extends Operation {
     private static final List<String> UNITS = Arrays.asList("miles", "km");
 
     private SearchEventsOperation(SearchEventsOperationBuilder builder) {
-        ofNullable(builder.keyword).ifPresent(e -> this.queryParams.put("keyword", e));
-        ofNullable(builder.locale).ifPresent(e -> this.queryParams.put("locale", e));
-        ofNullable(builder.attractionIds).ifPresent(e -> this.queryParams.put("attractionId", Joiner.on(",").skipNulls().join(e)));
-        ofNullable(builder.venueIds).ifPresent(e -> this.queryParams.put("venueId", Joiner.on(",").skipNulls().join(e)));
-        ofNullable(builder.promoterIds).ifPresent(e -> this.queryParams.put("promoterId", Joiner.on(",").skipNulls().join(e)));
-        ofNullable(builder.marketId).ifPresent(e -> this.queryParams.put("marketId", Integer.toString(e)));
-        ofNullable(builder.postalCode).ifPresent(e -> this.queryParams.put("postalCode", e));
-        if (builder.latitude != null || builder.longitude != null) {
-            Preconditions.checkNotNull(builder.latitude, "Latitude is required when passing longitude");
-            Preconditions.checkNotNull(builder.longitude, "Longitude is required when passing latitude");
-            this.queryParams.put("latlong", builder.latitude + "," + builder.longitude);
-        }
-        ofNullable(builder.radius).ifPresent(e -> this.queryParams.put("radius", Integer.toString(e)));
-        ofNullable(builder.unit).ifPresent(e -> this.queryParams.put("unit", e));
-        ofNullable(builder.pageSize).ifPresent(e -> this.queryParams.put("size", Integer.toString(e)));
-        ofNullable(builder.pageNumber).ifPresent(e -> this.queryParams.put("page", Integer.toString(e)));
-        ofNullable(builder.sort).ifPresent(e -> this.queryParams.put("sort", e));
+      if (builder.keyword != null && !builder.keyword.isEmpty()) {
+  			this.queryParams.put("keyword", builder.keyword);
+  		}
+  		if (builder.locale != null && !builder.locale.isEmpty()) {
+  			this.queryParams.put("locale", builder.locale);
+  		}
+  		if (builder.attractionIds != null && !builder.attractionIds.isEmpty()) {
+  			this.queryParams.put("attractionId", Joiner.on(",").skipNulls().join(builder.attractionIds));
+  		}
+  		if (builder.venueIds != null && !builder.venueIds.isEmpty()) {
+  			this.queryParams.put("venueId", Joiner.on(",").skipNulls().join(builder.venueIds));
+  		}
+  		if (builder.promoterIds != null && !builder.promoterIds.isEmpty()) {
+  			this.queryParams.put("promoterId", Joiner.on(",").skipNulls().join(builder.promoterIds));
+  		}
+  		if (builder.marketId != null) {
+  			this.queryParams.put("marketId", Integer.toString(builder.marketId));
+  		}
+  		if (builder.postalCode != null && !builder.postalCode.isEmpty()) {
+  			this.queryParams.put("postalCode", builder.postalCode);
+  		}
+  		if (builder.latitude != null || builder.longitude != null) {
+  			Preconditions.checkNotNull(builder.latitude, "Latitude is required when passing longitude");
+  			Preconditions.checkNotNull(builder.longitude, "Longitude is required when passing latitude");
+  			this.queryParams.put("latlong", builder.latitude + "," + builder.longitude);
+  		}
+  		if (builder.radius != null) {
+  			this.queryParams.put("radius", Integer.toString(builder.radius));
+  		}
+  		if (builder.unit != null && !builder.unit.isEmpty()) {
+  			this.queryParams.put("unit", builder.unit);
+  		}
+  		if (builder.pageSize != null) {
+  			this.queryParams.put("size", Integer.toString(builder.pageSize));
+  		}
+  		if (builder.pageNumber != null) {
+  			this.queryParams.put("page", Integer.toString(builder.pageNumber));
+  		}
+  		if (builder.sort != null && !builder.sort.isEmpty()) {
+  			this.queryParams.put("sort", builder.sort);
+  		}
     }
 
     public static SearchEventsOperationBuilder builder() {

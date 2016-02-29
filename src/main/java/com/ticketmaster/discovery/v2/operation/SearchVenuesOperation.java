@@ -1,7 +1,5 @@
 package com.ticketmaster.discovery.v2.operation;
 
-import static java.util.Optional.ofNullable;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -15,12 +13,24 @@ import lombok.ToString;
 public class SearchVenuesOperation extends Operation {
 
     private SearchVenuesOperation(SearchVenuesOperationBuilder builder) {
-        ofNullable(builder.keyword).ifPresent(e -> this.queryParams.put("keyword", e));
-        ofNullable(builder.locale).ifPresent(e -> this.queryParams.put("locale", e));
-        ofNullable(builder.venueIds).ifPresent(e -> this.queryParams.put("venueId", Joiner.on(",").skipNulls().join(e)));
-        ofNullable(builder.sort).ifPresent(e -> this.queryParams.put("sort", e));
-        ofNullable(builder.pageSize).ifPresent(e -> this.queryParams.put("size", Integer.toString(e)));
-        ofNullable(builder.pageNumber).ifPresent(e -> this.queryParams.put("page", Integer.toString(e)));
+      if (builder.keyword != null && !builder.keyword.isEmpty()) {
+  			this.queryParams.put("keyword", builder.keyword);
+  		}
+  		if (builder.locale != null && !builder.locale.isEmpty()) {
+  			this.queryParams.put("locale", builder.locale);
+  		}
+  		if (builder.venueIds != null && !builder.venueIds.isEmpty()) {
+  			this.queryParams.put("venueId", Joiner.on(",").skipNulls().join(builder.venueIds));
+  		}
+  		if (builder.sort != null && !builder.sort.isEmpty()) {
+  			this.queryParams.put("sort", builder.sort);
+  		}
+  		if (builder.pageSize != null) {
+  			this.queryParams.put("size", Integer.toString(builder.pageSize));
+  		}
+  		if (builder.pageNumber != null) {
+  			this.queryParams.put("page", Integer.toString(builder.pageNumber));
+  		}
     }
 
     public static SearchVenuesOperationBuilder builder() {

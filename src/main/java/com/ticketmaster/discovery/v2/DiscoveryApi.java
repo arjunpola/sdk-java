@@ -70,7 +70,9 @@ public class DiscoveryApi {
         HttpUrl.Builder builder = urlBuilder(pathByType.get(clazz.getSimpleName()));
 
         builder.addPathSegment(operation.getId());
-        operation.getQueryParameters().entrySet().stream().forEach(e -> builder.addQueryParameter(e.getKey(), e.getValue()));
+        for (Map.Entry<String, String> entry : operation.getQueryParameters().entrySet()) {
+          builder.addQueryParameter(entry.getKey(), entry.getValue());
+        }
 
         Request request = getRequest(builder.build());
         okhttp3.Response response = client.newCall(request).execute();
@@ -94,7 +96,9 @@ public class DiscoveryApi {
         logger.debug("searchEvents invoked with {}", operation);
 
         HttpUrl.Builder builder = urlBuilder(pathByType.get(Event.class.getSimpleName()));
-        operation.getQueryParameters().entrySet().stream().forEach(e -> builder.addQueryParameter(e.getKey(), e.getValue()));
+        for (Map.Entry<String, String> entry : operation.getQueryParameters().entrySet()) {
+          builder.addQueryParameter(entry.getKey(), entry.getValue());
+        }
 
         logger.debug("searchEvents about to load {}", builder.build());
         Request request = getRequest(builder.build());
@@ -106,7 +110,9 @@ public class DiscoveryApi {
     public PagedResponse<Attractions> searchAttractions(SearchAttractionsOperation operation) throws IOException {
         logger.debug("searchAttractions invoked with {}", operation);
         HttpUrl.Builder builder = urlBuilder(pathByType.get(Attraction.class.getSimpleName()));
-        operation.getQueryParameters().entrySet().stream().forEach(e -> builder.addQueryParameter(e.getKey(), e.getValue()));
+        for (Map.Entry<String, String> entry : operation.getQueryParameters().entrySet()) {
+          builder.addQueryParameter(entry.getKey(), entry.getValue());
+        }
 
         logger.debug("searchEvents about to load {}", builder.build());
         Request request = getRequest(builder.build());
@@ -118,7 +124,9 @@ public class DiscoveryApi {
     public PagedResponse<Venues> searchVenues(SearchVenuesOperation operation) throws IOException {
         logger.debug("searchVenues invoked with {}", operation);
         HttpUrl.Builder builder = urlBuilder(pathByType.get(Venue.class.getSimpleName()));
-        operation.getQueryParameters().entrySet().stream().forEach(e -> builder.addQueryParameter(e.getKey(), e.getValue()));
+        for (Map.Entry<String, String> entry : operation.getQueryParameters().entrySet()) {
+          builder.addQueryParameter(entry.getKey(), entry.getValue());
+        }
 
         logger.debug("searchEvents about to load {}", builder.build());
         Request request = getRequest(builder.build());
